@@ -557,6 +557,14 @@ ifeq ($(strip $(USE_CONDA)), True)
 endif
 
 
+# Set FTorch info if it is being used
+ifeq ($(strip $(USE_FTORCH)), True)
+  FTORCH_LOC := /glade/u/home/jatkinson/FTorch/bin/oneapi_2023.2.1_torch_2.1
+  INCLDIR += -I$(FTORCH_LOC)/include/ftorch
+  SLIBS += -L$(FTORCH_LOC)/lib64 -lftorch
+endif
+
+
 ifdef XIOS_PATH
   SLIBS += -L$(XIOS_PATH)/lib -lxios -lstdc++
 endif

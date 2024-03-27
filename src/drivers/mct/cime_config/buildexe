@@ -34,6 +34,7 @@ def _main_func():
         num_esp   = case.get_value("NUM_COMP_INST_ESP")
         os.environ["PIO_VERSION"] = str(case.get_value("PIO_VERSION"))
         os.environ["USE_CONDA"] = str(case.get_value("USE_CONDA"))
+        os.environ["USE_FTORCH"] = str(case.get_value("USE_FTORCH"))
     print(f'USE_CONDA = {os.environ["USE_CONDA"]} CONDA_PREFIX = {os.environ["CONDA_PREFIX"]}')
     expect((num_esp is None) or (int(num_esp) == 1), "ESP component restricted to one instance")
 
