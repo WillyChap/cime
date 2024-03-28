@@ -564,6 +564,10 @@ ifeq ($(strip $(USE_FTORCH)), True)
   SLIBS += -L$(FTORCH_LOC)/lib64 -lftorch
   LDFLAGS += -Wl,-rpath,$(FTORCH_LOC)/lib64
 endif
+FTORCH_LOC := /glade/u/home/jatkinson/FTorch/bin/oneapi_2023.2.1_torch_2.1
+INCLDIR += -I$(FTORCH_LOC)/include/ftorch
+SLIBS += -L$(FTORCH_LOC)/lib64 -lftorch
+LDFLAGS += -Wl,-rpath,$(FTORCH_LOC)/lib64
 
 
 ifdef XIOS_PATH
