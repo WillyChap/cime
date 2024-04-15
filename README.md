@@ -1,3 +1,41 @@
+# Fork of CIME implementing FTorch within CESM
+
+This fork of CIME (main README below) has been made by ICCS to facilitate the use
+of the [FTorch library](https://github.com/Cambridge-ICCS/FTorch) (for coupling PyTorch
+machine learning models to Fortran codes) from within CESM (the Community Earth
+System Model).
+
+It is based on the `maint-5.6` branch which is used to support CESM 2.
+
+
+## Using within CESM
+
+To use in CESM, first obtain a copy of CESM as described [here](https://github.com/ESCOMP/CESM)
+and then modify the `Externals.cfg` to point at this repository and branch instead:
+```
+[cime]
+branch = ftorch_forpy_cime
+protocol = git
+repo_url = https://github.com/Cambridge-ICCS/cime_je
+local_path = cime
+required = True
+```
+
+You will also need to have a copy of `libtorch`.
+On Derecho this can be loaded with:
+```
+module load libtorch/2.1.2
+```
+
+You will then need to build the FTorch library locally on your system as described
+[here](https://github.com/Cambridge-ICCS/FTorch).
+
+Finally Modify `scripts/Tools/Makefile` line 567 to set the environment variable
+`FTORCH_LOC` to the location of the FTorch library on your system.
+
+You can then proceed to write Fortran code using FTorch and build CESM as normal.
+
+
 # cime
 Common Infrastructure for Modeling the Earth
 
