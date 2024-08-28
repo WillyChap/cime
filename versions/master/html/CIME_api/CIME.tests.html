@@ -7,7 +7,7 @@
   <title>CIME.tests package &mdash; CIME master documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=d05bb7fd" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
 
   
   <!--[if lt IE 9]>
@@ -17,9 +17,8 @@
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="../_static/documentation_options.js?v=30d551ce"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/pop_ver.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -51,8 +50,8 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../what_cime/index.html">What is CIME?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../users_guide/index.html">Case Control System Part 1: Basic Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../users_guide/index.html#case-control-system-part-2-configuration-porting-testing-and-use-cases">Case Control System Part 2: Configuration, Porting, Testing and Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users_guide/index.html">Using the Case Control System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../users_guide/index.html#configuring-the-case-control-system">Configuring the Case Control System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../build_cpl/index.html">Building a Coupled Model with CIME</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../misc_tools/index.html">Miscellaneous Tools</a></li>
 </ul>
@@ -92,6 +91,7 @@
 <li class="toctree-l3"><a class="reference internal" href="CIME.html#module-CIME.expected_fails">CIME.expected_fails module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="CIME.html#module-CIME.get_tests">CIME.get_tests module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="CIME.html#module-CIME.get_timing">CIME.get_timing module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CIME.html#module-CIME.gitinterface">CIME.gitinterface module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="CIME.html#module-CIME.hist_utils">CIME.hist_utils module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="CIME.html#module-CIME.jenkins_generic_job">CIME.jenkins_generic_job module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="CIME.html#module-CIME.locked_files">CIME.locked_files module</a></li>
@@ -99,6 +99,7 @@
 <li class="toctree-l3"><a class="reference internal" href="CIME.html#module-CIME.nmlgen">CIME.nmlgen module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="CIME.html#module-CIME.provenance">CIME.provenance module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="CIME.html#module-CIME.simple_compare">CIME.simple_compare module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CIME.html#module-CIME.status">CIME.status module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="CIME.html#module-CIME.test_scheduler">CIME.test_scheduler module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="CIME.html#module-CIME.test_status">CIME.test_status module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="CIME.html#module-CIME.test_utils">CIME.test_utils module</a></li>
@@ -1041,6 +1042,12 @@ break query_testlists.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CIME.tests.test_sys_unittest.</span></span><span class="sig-name descname"><span class="pre">TestUnitTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_sys_unittest.html#TestUnitTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_sys_unittest.TestUnitTest" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#CIME.tests.base.BaseTestCase" title="CIME.tests.base.BaseTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTestCase</span></code></a></p>
 <dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_sys_unittest.TestUnitTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_sys_unittest.html#TestUnitTest.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_sys_unittest.TestUnitTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="CIME.tests.test_sys_unittest.TestUnitTest.setUpClass">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_sys_unittest.html#TestUnitTest.setUpClass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_sys_unittest.TestUnitTest.setUpClass" title="Link to this definition"></a></dt>
 <dd><p>Hook method for setting up class fixture before running tests in the class.</p>
@@ -1366,7 +1373,7 @@ break query_testlists.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="CIME.tests.test_unit_bless_test_results.TestUnitBlessTestResults.test_baseline_name_none">
-<span class="sig-name descname"><span class="pre">test_baseline_name_none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">get_test_status_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TestStatus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Case</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bless_namelists</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_bless_test_results.html#TestUnitBlessTestResults.test_baseline_name_none"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_bless_test_results.TestUnitBlessTestResults.test_baseline_name_none" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">test_baseline_name_none</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">get_test_status_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TestStatus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Case</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bless_namelists</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_current_branch</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_bless_test_results.html#TestUnitBlessTestResults.test_baseline_name_none"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_bless_test_results.TestUnitBlessTestResults.test_baseline_name_none" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1646,11 +1653,6 @@ break query_testlists.</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="CIME.tests.test_unit_case.TestCaseSubmit.test_check_case_test">
-<span class="sig-name descname"><span class="pre">test_check_case_test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_case.html#TestCaseSubmit.test_check_case_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_case.TestCaseSubmit.test_check_case_test" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="CIME.tests.test_unit_case.TestCaseSubmit.test_submit">
 <span class="sig-name descname"><span class="pre">test_submit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">read_xml</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_submit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_case.html#TestCaseSubmit.test_submit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_case.TestCaseSubmit.test_submit" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -1723,6 +1725,25 @@ break query_testlists.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="CIME.tests.test_unit_case_fake.TestCaseFake.test_create_clone">
 <span class="sig-name descname"><span class="pre">test_create_clone</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_case_fake.html#TestCaseFake.test_create_clone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_case_fake.TestCaseFake.test_create_clone" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-CIME.tests.test_unit_case_run">
+<span id="cime-tests-test-unit-case-run-module"></span><h2>CIME.tests.test_unit_case_run module<a class="headerlink" href="#module-CIME.tests.test_unit_case_run" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_case_run.TestCaseSubmit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CIME.tests.test_unit_case_run.</span></span><span class="sig-name descname"><span class="pre">TestCaseSubmit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_case_run.html#TestCaseSubmit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_case_run.TestCaseSubmit" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_case_run.TestCaseSubmit.test_post_run_check">
+<span class="sig-name descname"><span class="pre">test_post_run_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">isfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_case_run.html#TestCaseSubmit.test_post_run_check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_case_run.TestCaseSubmit.test_post_run_check" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_case_run.TestCaseSubmit.test_post_run_check_no_termination">
+<span class="sig-name descname"><span class="pre">test_post_run_check_no_termination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">isfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_case_run.html#TestCaseSubmit.test_post_run_check_no_termination"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_case_run.TestCaseSubmit.test_post_run_check_no_termination" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1966,6 +1987,11 @@ removed if it’s a maintenance problem.)</p>
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_config.TestConfig.test_ignore">
+<span class="sig-name descname"><span class="pre">test_ignore</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_config.html#TestConfig.test_ignore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_config.TestConfig.test_ignore" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="CIME.tests.test_unit_config.TestConfig.test_load">
 <span class="sig-name descname"><span class="pre">test_load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_config.html#TestConfig.test_load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_config.TestConfig.test_load" title="Link to this definition"></a></dt>
 <dd></dd></dl>
@@ -1976,6 +2002,11 @@ removed if it’s a maintenance problem.)</p>
 <dd></dd></dl>
 
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_config.spy">
+<span class="sig-prename descclassname"><span class="pre">CIME.tests.test_unit_config.</span></span><span class="sig-name descname"><span class="pre">spy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_config.html#spy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_config.spy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 </section>
 <section id="module-CIME.tests.test_unit_cs_status">
@@ -2371,6 +2402,135 @@ function of the main test class.</p>
 <dd></dd></dl>
 
 </dd></dl>
+
+</section>
+<section id="module-CIME.tests.test_unit_locked_files">
+<span id="cime-tests-test-unit-locked-files-module"></span><h2>CIME.tests.test_unit_locked_files module<a class="headerlink" href="#module-CIME.tests.test_unit_locked_files" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CIME.tests.test_unit_locked_files.</span></span><span class="sig-name descname"><span class="pre">TestLockedFiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_batch">
+<span class="sig-name descname"><span class="pre">test_check_diff_env_batch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_check_diff_env_batch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_batch" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_build">
+<span class="sig-name descname"><span class="pre">test_check_diff_env_build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_check_diff_env_build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_build" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_build_no_diff">
+<span class="sig-name descname"><span class="pre">test_check_diff_env_build_no_diff</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_check_diff_env_build_no_diff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_build_no_diff" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_build_pio_version">
+<span class="sig-name descname"><span class="pre">test_check_diff_env_build_pio_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_check_diff_env_build_pio_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_build_pio_version" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_case">
+<span class="sig-name descname"><span class="pre">test_check_diff_env_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_check_diff_env_case"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_case" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_mach_pes">
+<span class="sig-name descname"><span class="pre">test_check_diff_env_mach_pes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_check_diff_env_mach_pes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_mach_pes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_reset_and_rebuild">
+<span class="sig-name descname"><span class="pre">test_check_diff_reset_and_rebuild</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_check_diff_reset_and_rebuild"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_reset_and_rebuild" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_reset_and_rebuild_single">
+<span class="sig-name descname"><span class="pre">test_check_diff_reset_and_rebuild_single</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_check_diff_reset_and_rebuild_single"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_reset_and_rebuild_single" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_lockedfile">
+<span class="sig-name descname"><span class="pre">test_check_lockedfile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_check_lockedfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_lockedfile" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_lockedfiles">
+<span class="sig-name descname"><span class="pre">test_check_lockedfiles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_check_lockedfiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_lockedfiles" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_lockedfiles_quiet">
+<span class="sig-name descname"><span class="pre">test_check_lockedfiles_quiet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_check_lockedfiles_quiet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_lockedfiles_quiet" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_lockedfiles_skip">
+<span class="sig-name descname"><span class="pre">test_check_lockedfiles_skip</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_check_lockedfiles_skip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_lockedfiles_skip" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_diff_lockedfile">
+<span class="sig-name descname"><span class="pre">test_diff_lockedfile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_diff_lockedfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_diff_lockedfile" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_diff_lockedfile_detect_difference">
+<span class="sig-name descname"><span class="pre">test_diff_lockedfile_detect_difference</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_diff_lockedfile_detect_difference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_diff_lockedfile_detect_difference" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_diff_lockedfile_does_not_exist">
+<span class="sig-name descname"><span class="pre">test_diff_lockedfile_does_not_exist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_diff_lockedfile_does_not_exist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_diff_lockedfile_does_not_exist" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_diff_lockedfile_not_supported">
+<span class="sig-name descname"><span class="pre">test_diff_lockedfile_not_supported</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_diff_lockedfile_not_supported"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_diff_lockedfile_not_supported" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_is_locked">
+<span class="sig-name descname"><span class="pre">test_is_locked</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_is_locked"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_is_locked" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_lock_file">
+<span class="sig-name descname"><span class="pre">test_lock_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_lock_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_lock_file" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_lock_file_error_path">
+<span class="sig-name descname"><span class="pre">test_lock_file_error_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_lock_file_error_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_lock_file_error_path" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_lock_file_newname">
+<span class="sig-name descname"><span class="pre">test_lock_file_newname</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_lock_file_newname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_lock_file_newname" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_unlock_file">
+<span class="sig-name descname"><span class="pre">test_unlock_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_unlock_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_unlock_file" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.TestLockedFiles.test_unlock_file_error_path">
+<span class="sig-name descname"><span class="pre">test_unlock_file_error_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#TestLockedFiles.test_unlock_file_error_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.TestLockedFiles.test_unlock_file_error_path" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.create_batch_system">
+<span class="sig-prename descclassname"><span class="pre">CIME.tests.test_unit_locked_files.</span></span><span class="sig-name descname"><span class="pre">create_batch_system</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_submit_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#create_batch_system"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.create_batch_system" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_locked_files.create_fake_env">
+<span class="sig-prename descclassname"><span class="pre">CIME.tests.test_unit_locked_files.</span></span><span class="sig-name descname"><span class="pre">create_fake_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tempdir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_locked_files.html#create_fake_env"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_locked_files.create_fake_env" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 </section>
 <section id="module-CIME.tests.test_unit_nmlgen">
@@ -3254,6 +3414,25 @@ be user_nl_foo</p>
 </dd></dl>
 
 </section>
+<section id="module-CIME.tests.test_unit_xml_grids">
+<span id="cime-tests-test-unit-xml-grids-module"></span><h2>CIME.tests.test_unit_xml_grids module<a class="headerlink" href="#module-CIME.tests.test_unit_xml_grids" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_xml_grids.TestXMLGrids">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CIME.tests.test_unit_xml_grids.</span></span><span class="sig-name descname"><span class="pre">TestXMLGrids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_xml_grids.html#TestXMLGrids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_xml_grids.TestXMLGrids" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_xml_grids.TestXMLGrids.test_read_config_grids">
+<span class="sig-name descname"><span class="pre">test_read_config_grids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_xml_grids.html#TestXMLGrids.test_read_config_grids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_xml_grids.TestXMLGrids.test_read_config_grids" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="CIME.tests.test_unit_xml_grids.write_config_grids">
+<span class="sig-prename descclassname"><span class="pre">CIME.tests.test_unit_xml_grids.</span></span><span class="sig-name descname"><span class="pre">write_config_grids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tempdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CIME/tests/test_unit_xml_grids.html#write_config_grids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CIME.tests.test_unit_xml_grids.write_config_grids" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
 <section id="module-CIME.tests.test_unit_xml_machines">
 <span id="cime-tests-test-unit-xml-machines-module"></span><h2>CIME.tests.test_unit_xml_machines module<a class="headerlink" href="#module-CIME.tests.test_unit_xml_machines" title="Link to this heading"></a></h2>
 <dl class="py class">
@@ -3556,7 +3735,44 @@ env - A dict containing extra environment variables to set when calling</p>
       </div>
     </section>
   </div>
-  <script>
+  
+
+  <script type="text/javascript">
+    let baseUriRegex = /(.*\/cime)\/.*/g;
+    let parsedUri = baseUriRegex.exec(document.baseURI);
+
+    if (parsedUri != null && parsedUri.length == 2) {
+      let baseUri = parsedUri[1];
+
+      $.get(`${baseUri}/versions/versions.json`, function(data) {
+        let versionElement = $("#versions");
+
+        Object.keys(data).forEach(function(key) {
+          let value = data[key];
+
+          let item = `<dd><a href="${baseUri}/versions/${key}/html/">${value}</a></dd>`
+
+          versionElement.append(item);
+        });
+      });
+    }
+  </script>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl id="versions">
+        <dt>Versions</dt>
+      </dl>
+      
+      
+    </div>
+  </div>
+<script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });

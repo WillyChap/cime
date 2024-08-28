@@ -6,7 +6,7 @@
   <title>CIME.XML.grids &mdash; CIME master documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=d05bb7fd" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css" />
 
   
   <!--[if lt IE 9]>
@@ -16,9 +16,8 @@
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="../../../_static/documentation_options.js?v=30d551ce"></script>
-        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../../../_static/pop_ver.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -48,8 +47,8 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../what_cime/index.html">What is CIME?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../users_guide/index.html">Case Control System Part 1: Basic Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../users_guide/index.html#case-control-system-part-2-configuration-porting-testing-and-use-cases">Case Control System Part 2: Configuration, Porting, Testing and Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../users_guide/index.html">Using the Case Control System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../users_guide/index.html#configuring-the-case-control-system">Configuring the Case Control System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../build_cpl/index.html">Building a Coupled Model with CIME</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../misc_tools/index.html">Miscellaneous Tools</a></li>
 </ul>
@@ -103,6 +102,18 @@
 <span class="c1"># NOT appear in any file names - or anywhere in the path of directories holding input</span>
 <span class="c1"># data.</span>
 <span class="n">GRID_SEP</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span>
+
+<span class="c1"># elements of a valid grid long name</span>
+<span class="n">grid_prefix</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;atm&quot;</span><span class="p">:</span> <span class="s2">&quot;a%&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lnd&quot;</span><span class="p">:</span> <span class="s2">&quot;l%&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ocnice&quot;</span><span class="p">:</span> <span class="s2">&quot;oi%&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rof&quot;</span><span class="p">:</span> <span class="s2">&quot;r%&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;wav&quot;</span><span class="p">:</span> <span class="s2">&quot;w%&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;glc&quot;</span><span class="p">:</span> <span class="s2">&quot;g%&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mask&quot;</span><span class="p">:</span> <span class="s2">&quot;m%&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;iac&quot;</span><span class="p">:</span> <span class="s2">&quot;z%&quot;</span><span class="p">,</span>
+<span class="p">}</span>
 
 
 <div class="viewcode-block" id="Grids">
@@ -169,7 +180,11 @@
             <span class="n">name</span> <span class="o">=</span> <span class="n">levmatch</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">levmatch</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">levmatch</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 
         <span class="c1"># determine component_grids dictionary and grid longname</span>
-        <span class="n">lname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_config_grids</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">compset</span><span class="p">,</span> <span class="n">atmnlev</span><span class="p">,</span> <span class="n">lndnlev</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_valid_lname</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+            <span class="n">lname</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_config_grids</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">compset</span><span class="p">,</span> <span class="n">atmnlev</span><span class="p">,</span> <span class="n">lndnlev</span><span class="p">)</span>
+
         <span class="n">gridinfo</span><span class="p">[</span><span class="s2">&quot;GRID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lname</span>
         <span class="n">component_grids</span> <span class="o">=</span> <span class="n">_ComponentGrids</span><span class="p">(</span><span class="n">lname</span><span class="p">)</span>
 
@@ -187,25 +202,24 @@
         <span class="k">return</span> <span class="n">gridinfo</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_read_config_grids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">compset</span><span class="p">,</span> <span class="n">atmnlev</span><span class="p">,</span> <span class="n">lndnlev</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_valid_lname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        check if the grid long name is valid</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">valid</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comp_gridnames</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">grid_prefix</span><span class="p">[</span><span class="n">comp</span><span class="p">]</span> <span class="ow">in</span> <span class="n">name</span><span class="p">):</span>
+                <span class="n">valid</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">break</span>
+        <span class="k">return</span> <span class="n">valid</span>
+
+    <span class="k">def</span> <span class="nf">_read_config_grids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">compset</span><span class="p">,</span> <span class="n">atmnlev</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lndnlev</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        read config_grids.xml with version 2.0 schema</span>
 
 <span class="sd">        Returns a grid long name given the alias (&#39;name&#39; argument)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">model_grid</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">comp_gridname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comp_gridnames</span><span class="p">:</span>
-            <span class="n">model_grid</span><span class="p">[</span><span class="n">comp_gridname</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-
-        <span class="c1"># (1) set array of component grid defaults that match current compset</span>
         <span class="n">grids_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_child</span><span class="p">(</span><span class="s2">&quot;grids&quot;</span><span class="p">)</span>
-        <span class="n">grid_defaults_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_child</span><span class="p">(</span><span class="s2">&quot;model_grid_defaults&quot;</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="n">grids_node</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">grid_node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="s2">&quot;grid&quot;</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="n">grid_defaults_node</span><span class="p">):</span>
-            <span class="n">name_attrib</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">grid_node</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span>
-            <span class="n">compset_attrib</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">grid_node</span><span class="p">,</span> <span class="s2">&quot;compset&quot;</span><span class="p">)</span>
-            <span class="n">compset_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">compset_attrib</span><span class="p">,</span> <span class="n">compset</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">compset_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">model_grid</span><span class="p">[</span><span class="n">name_attrib</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">grid_node</span><span class="p">)</span>
 
         <span class="c1"># (2)loop over all of the &quot;model grid&quot; nodes and determine is there an alias match with the</span>
         <span class="c1"># input grid name -  if there is an alias match determine if the &quot;compset&quot; and &quot;not_compset&quot;</span>
@@ -266,50 +280,69 @@
             <span class="n">foundcompset</span><span class="p">,</span> <span class="s2">&quot;grid alias </span><span class="si">{}</span><span class="s2"> not valid for compset </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">compset</span><span class="p">)</span>
         <span class="p">)</span>
 
-        <span class="c1"># for the match - find all of the component grid settings</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_grid_longname</span><span class="p">(</span>
+            <span class="n">grids_node</span><span class="p">,</span> <span class="n">model_gridnode</span><span class="p">,</span> <span class="n">compset</span><span class="p">,</span> <span class="n">atmnlev</span><span class="p">,</span> <span class="n">lndnlev</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="Grids.get_grid_longname">
+<a class="viewcode-back" href="../../../CIME_api/CIME.XML.html#CIME.XML.grids.Grids.get_grid_longname">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_grid_longname</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">grids_node</span><span class="p">,</span> <span class="n">model_gridnode</span><span class="p">,</span> <span class="n">compset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">atmnlev</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lndnlev</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="n">model_grid</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">comp_gridname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comp_gridnames</span><span class="p">:</span>
+            <span class="n">model_grid</span><span class="p">[</span><span class="n">comp_gridname</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">compset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">grid_defaults_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_child</span><span class="p">(</span><span class="s2">&quot;model_grid_defaults&quot;</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="n">grids_node</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">grid_node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="s2">&quot;grid&quot;</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="n">grid_defaults_node</span><span class="p">):</span>
+                <span class="n">name_attrib</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">grid_node</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span>
+                <span class="n">compset_attrib</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">grid_node</span><span class="p">,</span> <span class="s2">&quot;compset&quot;</span><span class="p">)</span>
+                <span class="n">compset_match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">compset_attrib</span><span class="p">,</span> <span class="n">compset</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">compset_match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">model_grid</span><span class="p">[</span><span class="n">name_attrib</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">grid_node</span><span class="p">)</span>
+
         <span class="n">grid_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="s2">&quot;grid&quot;</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="n">model_gridnode</span><span class="p">)</span>
+
         <span class="k">for</span> <span class="n">grid_node</span> <span class="ow">in</span> <span class="n">grid_nodes</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">grid_node</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span>
             <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">grid_node</span><span class="p">)</span>
+
             <span class="k">if</span> <span class="n">model_grid</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;null&quot;</span><span class="p">:</span>
                 <span class="n">model_grid</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
         <span class="n">mask_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_optional_child</span><span class="p">(</span><span class="s2">&quot;mask&quot;</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="n">model_gridnode</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">mask_node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">model_grid</span><span class="p">[</span><span class="s2">&quot;mask&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">mask_node</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">model_grid</span><span class="p">[</span><span class="s2">&quot;mask&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_grid</span><span class="p">[</span><span class="s2">&quot;ocnice&quot;</span><span class="p">]</span>
 
-        <span class="c1"># determine component grids and associated required domains and gridmaps</span>
-        <span class="c1"># TODO: this should be in XML, not here</span>
-        <span class="n">prefix</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;atm&quot;</span><span class="p">:</span> <span class="s2">&quot;a%&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;lnd&quot;</span><span class="p">:</span> <span class="s2">&quot;l%&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ocnice&quot;</span><span class="p">:</span> <span class="s2">&quot;oi%&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;rof&quot;</span><span class="p">:</span> <span class="s2">&quot;r%&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;wav&quot;</span><span class="p">:</span> <span class="s2">&quot;w%&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;glc&quot;</span><span class="p">:</span> <span class="s2">&quot;g%&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mask&quot;</span><span class="p">:</span> <span class="s2">&quot;m%&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;iac&quot;</span><span class="p">:</span> <span class="s2">&quot;z%&quot;</span><span class="p">,</span>
-        <span class="p">}</span>
         <span class="n">lname</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
         <span class="k">for</span> <span class="n">component_gridname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comp_gridnames</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">lname</span><span class="p">:</span>
-                <span class="n">lname</span> <span class="o">=</span> <span class="n">lname</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">prefix</span><span class="p">[</span><span class="n">component_gridname</span><span class="p">]</span>
+                <span class="n">lname</span> <span class="o">=</span> <span class="n">lname</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">grid_prefix</span><span class="p">[</span><span class="n">component_gridname</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">lname</span> <span class="o">=</span> <span class="n">prefix</span><span class="p">[</span><span class="n">component_gridname</span><span class="p">]</span>
+                <span class="n">lname</span> <span class="o">=</span> <span class="n">grid_prefix</span><span class="p">[</span><span class="n">component_gridname</span><span class="p">]</span>
+
             <span class="k">if</span> <span class="n">model_grid</span><span class="p">[</span><span class="n">component_gridname</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">lname</span> <span class="o">+=</span> <span class="n">model_grid</span><span class="p">[</span><span class="n">component_gridname</span><span class="p">]</span>
+
                 <span class="k">if</span> <span class="n">component_gridname</span> <span class="o">==</span> <span class="s2">&quot;atm&quot;</span> <span class="ow">and</span> <span class="n">atmnlev</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="s2">&quot;a</span><span class="si">{:n}</span><span class="s2">ull&quot;</span> <span class="ow">in</span> <span class="n">lname</span><span class="p">):</span>
                         <span class="n">lname</span> <span class="o">+=</span> <span class="s2">&quot;z&quot;</span> <span class="o">+</span> <span class="n">atmnlev</span>
-
                 <span class="k">elif</span> <span class="n">component_gridname</span> <span class="o">==</span> <span class="s2">&quot;lnd&quot;</span> <span class="ow">and</span> <span class="n">lndnlev</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="s2">&quot;l</span><span class="si">{:n}</span><span class="s2">ull&quot;</span> <span class="ow">in</span> <span class="n">lname</span><span class="p">):</span>
                         <span class="n">lname</span> <span class="o">+=</span> <span class="s2">&quot;z&quot;</span> <span class="o">+</span> <span class="n">lndnlev</span>
-
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">lname</span> <span class="o">+=</span> <span class="s2">&quot;null&quot;</span>
-        <span class="k">return</span> <span class="n">lname</span>
+
+        <span class="k">return</span> <span class="n">lname</span></div>
+
 
     <span class="k">def</span> <span class="nf">_get_domains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">component_grids</span><span class="p">,</span> <span class="n">atmlevregex</span><span class="p">,</span> <span class="n">lndlevregex</span><span class="p">,</span> <span class="n">driver</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;determine domains dictionary for config_grids.xml v2 schema&quot;&quot;&quot;</span>
@@ -619,7 +652,7 @@
 
 <div class="viewcode-block" id="Grids.print_values">
 <a class="viewcode-back" href="../../../CIME_api/CIME.XML.html#CIME.XML.grids.Grids.print_values">[docs]</a>
-    <span class="k">def</span> <span class="nf">print_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">long_output</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">print_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">long</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># write out help message</span>
         <span class="n">helptext</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_element_text</span><span class="p">(</span><span class="s2">&quot;help&quot;</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">helptext</span><span class="p">))</span>
@@ -653,7 +686,7 @@
         <span class="p">)</span>
 
         <span class="n">domains</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">if</span> <span class="n">long_output</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">long</span><span class="p">:</span>
             <span class="n">domain_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="s2">&quot;domain&quot;</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_child</span><span class="p">(</span><span class="s2">&quot;domains&quot;</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">domain_node</span> <span class="ow">in</span> <span class="n">domain_nodes</span><span class="p">:</span>
                 <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">domain_node</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span>
@@ -679,7 +712,8 @@
                     <span class="n">desc</span><span class="p">,</span> <span class="n">files</span>
                 <span class="p">)</span>
 
-        <span class="n">model_grid_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="s2">&quot;model_grid&quot;</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_child</span><span class="p">(</span><span class="s2">&quot;grids&quot;</span><span class="p">))</span>
+        <span class="n">grids_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_child</span><span class="p">(</span><span class="s2">&quot;grids&quot;</span><span class="p">)</span>
+        <span class="n">model_grid_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="s2">&quot;model_grid&quot;</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="n">grids_node</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">model_grid_node</span> <span class="ow">in</span> <span class="n">model_grid_nodes</span><span class="p">:</span>
             <span class="n">alias</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">model_grid_node</span><span class="p">,</span> <span class="s2">&quot;alias&quot;</span><span class="p">)</span>
             <span class="n">compset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">model_grid_node</span><span class="p">,</span> <span class="s2">&quot;compset&quot;</span><span class="p">)</span>
@@ -696,6 +730,8 @@
             <span class="n">grid_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="s2">&quot;grid&quot;</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="n">model_grid_node</span><span class="p">)</span>
             <span class="n">grids</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
             <span class="n">gridnames</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">lname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_grid_longname</span><span class="p">(</span><span class="n">grids_node</span><span class="p">,</span> <span class="n">model_grid_node</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{:&lt;7}</span><span class="s2">longname: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">lname</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">grid_node</span> <span class="ow">in</span> <span class="n">grid_nodes</span><span class="p">:</span>
                 <span class="n">gridnames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">grid_node</span><span class="p">))</span>
                 <span class="n">grids</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">grid_node</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">grid_node</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;  &quot;</span>
@@ -703,11 +739,18 @@
             <span class="n">mask_nodes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="s2">&quot;mask&quot;</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="n">model_grid_node</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">mask_node</span> <span class="ow">in</span> <span class="n">mask_nodes</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;       mask is: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">mask_node</span><span class="p">)))</span>
-            <span class="k">if</span> <span class="n">long_output</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">long</span><span class="p">:</span>
                 <span class="n">gridnames</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">gridnames</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">gridname</span> <span class="ow">in</span> <span class="n">gridnames</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">gridname</span> <span class="o">!=</span> <span class="s2">&quot;null&quot;</span><span class="p">:</span>
-                        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;    </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">domains</span><span class="p">[</span><span class="n">gridname</span><span class="p">]))</span></div>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;    </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">domains</span><span class="p">[</span><span class="n">gridname</span><span class="p">]))</span>
+                        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                                <span class="s2">&quot;    Could not provide domains for gridname </span><span class="si">{!r}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                    <span class="n">gridname</span>
+                                <span class="p">)</span>
+                            <span class="p">)</span></div>
 </div>
 
 
@@ -973,7 +1016,44 @@
       </div>
     </section>
   </div>
-  <script>
+  
+
+  <script type="text/javascript">
+    let baseUriRegex = /(.*\/cime)\/.*/g;
+    let parsedUri = baseUriRegex.exec(document.baseURI);
+
+    if (parsedUri != null && parsedUri.length == 2) {
+      let baseUri = parsedUri[1];
+
+      $.get(`${baseUri}/versions/versions.json`, function(data) {
+        let versionElement = $("#versions");
+
+        Object.keys(data).forEach(function(key) {
+          let value = data[key];
+
+          let item = `<dd><a href="${baseUri}/versions/${key}/html/">${value}</a></dd>`
+
+          versionElement.append(item);
+        });
+      });
+    }
+  </script>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl id="versions">
+        <dt>Versions</dt>
+      </dl>
+      
+      
+    </div>
+  </div>
+<script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });

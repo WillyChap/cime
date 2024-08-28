@@ -6,7 +6,7 @@
   <title>Index &mdash; CIME master documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=d05bb7fd" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css" />
 
   
   <!--[if lt IE 9]>
@@ -16,9 +16,8 @@
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="_static/documentation_options.js?v=30d551ce"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="_static/pop_ver.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -48,8 +47,8 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="what_cime/index.html">What is CIME?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="users_guide/index.html">Case Control System Part 1: Basic Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="users_guide/index.html#case-control-system-part-2-configuration-porting-testing-and-use-cases">Case Control System Part 2: Configuration, Porting, Testing and Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="users_guide/index.html">Using the Case Control System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="users_guide/index.html#configuring-the-case-control-system">Configuring the Case Control System</a></li>
 <li class="toctree-l1"><a class="reference internal" href="build_cpl/index.html">Building a Coupled Model with CIME</a></li>
 <li class="toctree-l1"><a class="reference internal" href="misc_tools/index.html">Miscellaneous Tools</a></li>
 </ul>
@@ -152,13 +151,13 @@
 </li>
       <li><a href="CIME_api/CIME.html#CIME.utils.analyze_build_log">analyze_build_log() (in module CIME.utils)</a>
 </li>
-      <li><a href="CIME_api/CIME.html#CIME.utils.append_case_status">append_case_status() (in module CIME.utils)</a>
+      <li><a href="CIME_api/CIME.html#CIME.status.append_case_status">append_case_status() (in module CIME.status)</a>
 </li>
-      <li><a href="CIME_api/CIME.html#CIME.utils.append_status">append_status() (in module CIME.utils)</a>
+      <li><a href="CIME_api/CIME.html#CIME.status.append_status">append_status() (in module CIME.status)</a>
 </li>
       <li><a href="CIME_api/CIME.html#CIME.compare_test_results.append_status_cprnc_log">append_status_cprnc_log() (in module CIME.compare_test_results)</a>
 </li>
-      <li><a href="CIME_api/CIME.html#CIME.utils.append_testlog">append_testlog() (in module CIME.utils)</a>
+      <li><a href="CIME_api/CIME.html#CIME.status.append_testlog">append_testlog() (in module CIME.status)</a>
 </li>
       <li><a href="CIME_api/CIME.SystemTests.test_utils.html#CIME.SystemTests.test_utils.user_nl_utils.append_to_user_nl_files">append_to_user_nl_files() (in module CIME.SystemTests.test_utils.user_nl_utils)</a>
 </li>
@@ -183,8 +182,6 @@
       <li><a href="CIME_api/CIME.html#CIME.jenkins_generic_job.archive_old_test_data">archive_old_test_data() (in module CIME.jenkins_generic_job)</a>
 </li>
       <li><a href="CIME_api/CIME.XML.html#CIME.XML.archive_base.ArchiveBase">ArchiveBase (class in CIME.XML.archive_base)</a>
-</li>
-      <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.ArgumentParser">ArgumentParser (class in CIME.scripts.query_config)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_compare_two.Call.arguments">arguments (CIME.tests.test_unit_compare_two.Call attribute)</a>
 </li>
@@ -272,10 +269,6 @@
         <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.hommebaseclass.HommeBase.build_phase">(CIME.SystemTests.hommebaseclass.HommeBase method)</a>
 </li>
         <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.icp.ICP.build_phase">(CIME.SystemTests.icp.ICP method)</a>
-</li>
-        <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.mvk.MVK.build_phase">(CIME.SystemTests.mvk.MVK method)</a>
-</li>
-        <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.pgn.PGN.build_phase">(CIME.SystemTests.pgn.PGN method)</a>
 </li>
         <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.system_tests_common.FakeTest.build_phase">(CIME.SystemTests.system_tests_common.FakeTest method)</a>
 </li>
@@ -398,6 +391,8 @@
         <li><a href="CIME_api/CIME.case.html#CIME.case.case_submit.check_DA_settings">(in module CIME.case.case_submit)</a>
 </li>
       </ul></li>
+      <li><a href="CIME_api/CIME.html#CIME.locked_files.check_diff">check_diff() (in module CIME.locked_files)</a>
+</li>
       <li><a href="CIME_api/CIME.case.html#CIME.case.case.Case.check_if_comp_var">check_if_comp_var() (CIME.case.case.Case method)</a>
 
       <ul>
@@ -414,18 +409,10 @@
         <li><a href="CIME_api/CIME.case.html#CIME.case.check_input_data.check_input_data">(in module CIME.case.check_input_data)</a>
 </li>
       </ul></li>
-      <li><a href="CIME_api/CIME.case.html#CIME.case.case.Case.check_lockedfile">check_lockedfile() (CIME.case.case.Case method)</a>
-
-      <ul>
-        <li><a href="CIME_api/CIME.case.html#CIME.case.check_lockedfiles.check_lockedfile">(in module CIME.case.check_lockedfiles)</a>
+      <li><a href="CIME_api/CIME.html#CIME.locked_files.check_lockedfile">check_lockedfile() (in module CIME.locked_files)</a>
 </li>
-      </ul></li>
-      <li><a href="CIME_api/CIME.case.html#CIME.case.case.Case.check_lockedfiles">check_lockedfiles() (CIME.case.case.Case method)</a>
-
-      <ul>
-        <li><a href="CIME_api/CIME.case.html#CIME.case.check_lockedfiles.check_lockedfiles">(in module CIME.case.check_lockedfiles)</a>
+      <li><a href="CIME_api/CIME.html#CIME.locked_files.check_lockedfiles">check_lockedfiles() (in module CIME.locked_files)</a>
 </li>
-      </ul></li>
       <li><a href="CIME_api/CIME.Tools.html#CIME.Tools.standard_script_setup.check_minimum_python_version">check_minimum_python_version() (in module CIME.Tools.standard_script_setup)</a>
 
       <ul>
@@ -434,12 +421,6 @@
       </ul></li>
       <li><a href="CIME_api/CIME.html#CIME.utils.check_name">check_name() (in module CIME.utils)</a>
 </li>
-      <li><a href="CIME_api/CIME.case.html#CIME.case.case.Case.check_pelayouts_require_rebuild">check_pelayouts_require_rebuild() (CIME.case.case.Case method)</a>
-
-      <ul>
-        <li><a href="CIME_api/CIME.case.html#CIME.case.check_lockedfiles.check_pelayouts_require_rebuild">(in module CIME.case.check_lockedfiles)</a>
-</li>
-      </ul></li>
       <li><a href="CIME_api/CIME.XML.html#CIME.XML.generic_xml.GenericXML.check_timestamp">check_timestamp() (CIME.XML.generic_xml.GenericXML method)</a>
 </li>
       <li><a href="CIME_api/CIME.case.html#CIME.case.case.Case.check_timestamps">check_timestamps() (CIME.case.case.Case method)</a>
@@ -594,13 +575,6 @@
 </li>
       </ul></li>
       <li>
-    CIME.case.check_lockedfiles
-
-      <ul>
-        <li><a href="CIME_api/CIME.case.html#module-CIME.case.check_lockedfiles">module</a>
-</li>
-      </ul></li>
-      <li>
     CIME.case.preview_namelists
 
       <ul>
@@ -696,6 +670,13 @@
 
       <ul>
         <li><a href="CIME_api/CIME.html#module-CIME.get_timing">module</a>
+</li>
+      </ul></li>
+      <li>
+    CIME.gitinterface
+
+      <ul>
+        <li><a href="CIME_api/CIME.html#module-CIME.gitinterface">module</a>
 </li>
       </ul></li>
       <li>
@@ -832,6 +813,13 @@
 </li>
       </ul></li>
       <li>
+    CIME.status
+
+      <ul>
+        <li><a href="CIME_api/CIME.html#module-CIME.status">module</a>
+</li>
+      </ul></li>
+      <li>
     CIME.SystemTests
 
       <ul>
@@ -958,13 +946,6 @@
 </li>
       </ul></li>
       <li>
-    CIME.SystemTests.mvk
-
-      <ul>
-        <li><a href="CIME_api/CIME.SystemTests.html#module-CIME.SystemTests.mvk">module</a>
-</li>
-      </ul></li>
-      <li>
     CIME.SystemTests.nck
 
       <ul>
@@ -1011,13 +992,6 @@
 
       <ul>
         <li><a href="CIME_api/CIME.SystemTests.html#module-CIME.SystemTests.pfs">module</a>
-</li>
-      </ul></li>
-      <li>
-    CIME.SystemTests.pgn
-
-      <ul>
-        <li><a href="CIME_api/CIME.SystemTests.html#module-CIME.SystemTests.pgn">module</a>
 </li>
       </ul></li>
       <li>
@@ -1195,8 +1169,6 @@
         <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_sys_create_newcase">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     CIME.tests.test_sys_full_system
 
@@ -1225,6 +1197,8 @@
         <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_sys_manage_and_query">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     CIME.tests.test_sys_query_config
 
@@ -1317,6 +1291,13 @@
 </li>
       </ul></li>
       <li>
+    CIME.tests.test_unit_case_run
+
+      <ul>
+        <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_case_run">module</a>
+</li>
+      </ul></li>
+      <li>
     CIME.tests.test_unit_case_setup
 
       <ul>
@@ -1384,6 +1365,13 @@
 
       <ul>
         <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_hist_utils">module</a>
+</li>
+      </ul></li>
+      <li>
+    CIME.tests.test_unit_locked_files
+
+      <ul>
+        <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_locked_files">module</a>
 </li>
       </ul></li>
       <li>
@@ -1461,6 +1449,13 @@
 
       <ul>
         <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_xml_env_mach_specific">module</a>
+</li>
+      </ul></li>
+      <li>
+    CIME.tests.test_unit_xml_grids
+
+      <ul>
+        <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_xml_grids">module</a>
 </li>
       </ul></li>
       <li>
@@ -1848,6 +1843,10 @@
 </li>
       <li><a href="CIME_api/CIME.html#CIME.config.Config">Config (class in CIME.config)</a>
 </li>
+      <li><a href="CIME_api/CIME.html#CIME.gitinterface.GitInterface.config_get_value">config_get_value() (CIME.gitinterface.GitInterface method)</a>
+</li>
+      <li><a href="CIME_api/CIME.html#CIME.gitinterface.GitInterface.config_set_value">config_set_value() (CIME.gitinterface.GitInterface method)</a>
+</li>
       <li><a href="CIME_api/CIME.html#CIME.config.ConfigBase">ConfigBase (class in CIME.config)</a>
 </li>
       <li><a href="CIME_api/CIME.case.html#CIME.case.case.Case.configure">configure() (CIME.case.case.Case method)</a>
@@ -1902,6 +1901,8 @@
 </li>
       <li><a href="CIME_api/CIME.case.html#CIME.case.case.Case.create">create() (CIME.case.case.Case method)</a>
 </li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.create_batch_system">create_batch_system() (in module CIME.tests.test_unit_locked_files)</a>
+</li>
       <li><a href="CIME_api/CIME.case.html#CIME.case.case.Case.create_caseroot">create_caseroot() (CIME.case.case.Case method)</a>
 </li>
       <li><a href="CIME_api/CIME.html#CIME.wait_for_tests.create_cdash_build_xml">create_cdash_build_xml() (in module CIME.wait_for_tests)</a>
@@ -1934,6 +1935,8 @@
         <li><a href="CIME_api/CIME.case.html#CIME.case.preview_namelists.create_dirs">(in module CIME.case.preview_namelists)</a>
 </li>
       </ul></li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.create_fake_env">create_fake_env() (in module CIME.tests.test_unit_locked_files)</a>
+</li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_two_link_to_case2_output.TestLinkToCase2Output.create_file_in_rundir2">create_file_in_rundir2() (CIME.tests.test_unit_two_link_to_case2_output.TestLinkToCase2Output method)</a>
 </li>
       <li><a href="CIME_api/CIME.XML.html#CIME.XML.env_batch.EnvBatch.create_job_groups">create_job_groups() (CIME.XML.env_batch.EnvBatch method)</a>
@@ -2026,6 +2029,8 @@
 </li>
       <li><a href="CIME_api/CIME.XML.html#CIME.XML.namelist_definition.NamelistDefinition.dict_to_namelist">dict_to_namelist() (CIME.XML.namelist_definition.NamelistDefinition method)</a>
 </li>
+      <li><a href="CIME_api/CIME.html#CIME.locked_files.diff_lockedfile">diff_lockedfile() (in module CIME.locked_files)</a>
+</li>
       <li><a href="CIME_api/CIME.XML.html#CIME.XML.generic_xml.GenericXML.DISABLE_CACHING">DISABLE_CACHING (CIME.XML.generic_xml.GenericXML attribute)</a>
 </li>
       <li><a href="CIME_api/CIME.html#CIME.utils.does_file_have_string">does_file_have_string() (in module CIME.utils)</a>
@@ -2066,17 +2071,15 @@
 </li>
       <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.eri.ERI">ERI (class in CIME.SystemTests.eri)</a>
 </li>
-      <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.erio.ERIO">ERIO (class in CIME.SystemTests.erio)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.erio.ERIO">ERIO (class in CIME.SystemTests.erio)</a>
+</li>
       <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.erp.ERP">ERP (class in CIME.SystemTests.erp)</a>
 </li>
       <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.err.ERR">ERR (class in CIME.SystemTests.err)</a>
 </li>
       <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.erri.ERRI">ERRI (class in CIME.SystemTests.erri)</a>
-</li>
-      <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.ArgumentParser.error">error() (CIME.scripts.query_config.ArgumentParser method)</a>
 </li>
       <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.ers.ERS">ERS (class in CIME.SystemTests.ers)</a>
 </li>
@@ -2278,12 +2281,16 @@
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_compare_two.TestSystemTestsCompareTwo.get_compare_phase_name">get_compare_phase_name() (CIME.tests.test_unit_compare_two.TestSystemTestsCompareTwo method)</a>
 </li>
+      <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.get_component_classes">get_component_classes() (in module CIME.scripts.query_config)</a>
+</li>
       <li><a href="CIME_api/CIME.XML.html#CIME.XML.files.Files.get_components">get_components() (CIME.XML.files.Files method)</a>
 
       <ul>
         <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.get_components">(in module CIME.scripts.query_config)</a>
 </li>
       </ul></li>
+      <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.get_compset_active_components">get_compset_active_components() (in module CIME.scripts.query_config)</a>
+</li>
       <li><a href="CIME_api/CIME.case.html#CIME.case.case.Case.get_compset_components">get_compset_components() (CIME.case.case.Case method)</a>
 </li>
       <li><a href="CIME_api/CIME.XML.html#CIME.XML.compsets.Compsets.get_compset_longnames">get_compset_longnames() (CIME.XML.compsets.Compsets method)</a>
@@ -2296,8 +2303,6 @@
         <li><a href="CIME_api/CIME.XML.html#CIME.XML.compsets.Compsets.get_compset_var_settings">(CIME.XML.compsets.Compsets method)</a>
 </li>
       </ul></li>
-      <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.get_compsets">get_compsets() (in module CIME.scripts.query_config)</a>
-</li>
       <li><a href="CIME_api/CIME.html#CIME.utils.get_config_path">get_config_path() (in module CIME.utils)</a>
 </li>
       <li><a href="CIME_api/CIME.baselines.html#CIME.baselines.performance.get_cpl_mem_usage">get_cpl_mem_usage() (in module CIME.baselines.performance)</a>
@@ -2385,6 +2390,8 @@
       <li><a href="CIME_api/CIME.html#CIME.build.CmakeTmpBuildDir.get_full_tmpdir">get_full_tmpdir() (CIME.build.CmakeTmpBuildDir method)</a>
 </li>
       <li><a href="CIME_api/CIME.XML.html#CIME.XML.grids.Grids.get_grid_info">get_grid_info() (CIME.XML.grids.Grids method)</a>
+</li>
+      <li><a href="CIME_api/CIME.XML.html#CIME.XML.grids.Grids.get_grid_longname">get_grid_longname() (CIME.XML.grids.Grids method)</a>
 </li>
       <li><a href="CIME_api/CIME.XML.html#CIME.XML.namelist_definition.NamelistDefinition.get_group">get_group() (CIME.XML.namelist_definition.NamelistDefinition method)</a>
 </li>
@@ -2694,8 +2701,6 @@
         <li><a href="CIME_api/CIME.XML.html#CIME.XML.generic_xml.GenericXML.get_values">(CIME.XML.generic_xml.GenericXML method)</a>
 </li>
       </ul></li>
-      <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.pgn.PGN.get_var_list">get_var_list() (CIME.SystemTests.pgn.PGN method)</a>
-</li>
       <li><a href="CIME_api/CIME.html#CIME.namelist.Namelist.get_variable_names">get_variable_names() (CIME.namelist.Namelist method)</a>
 </li>
       <li><a href="CIME_api/CIME.html#CIME.namelist.Namelist.get_variable_value">get_variable_value() (CIME.namelist.Namelist method)</a>
@@ -2726,6 +2731,10 @@
         <li><a href="CIME_api/CIME.Servers.html#CIME.Servers.wget.WGET.getfile">(CIME.Servers.wget.WGET method)</a>
 </li>
       </ul></li>
+      <li><a href="CIME_api/CIME.html#CIME.gitinterface.GitInterface.git_operation">git_operation() (CIME.gitinterface.GitInterface method)</a>
+</li>
+      <li><a href="CIME_api/CIME.html#CIME.gitinterface.GitInterface">GitInterface (class in CIME.gitinterface)</a>
+</li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.base.BaseTestCase.GLOBAL_TIMEOUT">GLOBAL_TIMEOUT (CIME.tests.base.BaseTestCase attribute)</a>
 </li>
       <li><a href="glossary/index.html#term-grid-GRID"><strong>grid (GRID)</strong></a>
@@ -2802,11 +2811,13 @@
 </li>
       <li><a href="CIME_api/CIME.XML.html#CIME.XML.generic_xml.GenericXML.invalidate">invalidate() (CIME.XML.generic_xml.GenericXML class method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.irt.IRT">IRT (class in CIME.SystemTests.irt)</a>
 </li>
-      <li><a href="CIME_api/CIME.html#CIME.bless_test_results.is_bless_needed">is_bless_needed() (in module CIME.bless_test_results)</a>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="CIME_api/CIME.html#CIME.utils.is_comp_standalone">is_comp_standalone() (in module CIME.utils)</a>
+</li>
+      <li><a href="CIME_api/CIME.html#CIME.bless_test_results.is_hist_bless_needed">is_hist_bless_needed() (in module CIME.bless_test_results)</a>
 </li>
       <li><a href="CIME_api/CIME.html#CIME.utils.is_last_process_complete">is_last_process_complete() (in module CIME.utils)</a>
 </li>
@@ -2882,9 +2893,11 @@
 </li>
       <li><a href="CIME_api/CIME.html#CIME.config.ConfigBase.load">load() (CIME.config.ConfigBase class method)</a>
 </li>
+      <li><a href="CIME_api/CIME.baselines.html#CIME.baselines.performance.load_coupler_customization">load_coupler_customization() (in module CIME.baselines.performance)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="CIME_api/CIME.baselines.html#CIME.baselines.performance.load_coupler_customization">load_coupler_customization() (in module CIME.baselines.performance)</a>
+      <li><a href="CIME_api/CIME.html#CIME.config.Config.load_defaults">load_defaults() (CIME.config.Config class method)</a>
 </li>
       <li><a href="CIME_api/CIME.case.html#CIME.case.case.Case.load_env">load_env() (CIME.case.case.Case method)</a>
 
@@ -2910,12 +2923,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.base.BaseTestCase.MACHINE">MACHINE (CIME.tests.base.BaseTestCase attribute)</a>
 </li>
-      <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.Machines">Machines (class in CIME.scripts.query_config)</a>
-
-      <ul>
-        <li><a href="CIME_api/CIME.XML.html#CIME.XML.machines.Machines">(class in CIME.XML.machines)</a>
+      <li><a href="CIME_api/CIME.XML.html#CIME.XML.machines.Machines">Machines (class in CIME.XML.machines)</a>
 </li>
-      </ul></li>
       <li><a href="CIME_api/CIME.XML.html#CIME.XML.env_batch.EnvBatch.make_all_batch_files">make_all_batch_files() (CIME.XML.env_batch.EnvBatch method)</a>
 </li>
       <li><a href="CIME_api/CIME.XML.html#CIME.XML.env_batch.EnvBatch.make_batch_script">make_batch_script() (CIME.XML.env_batch.EnvBatch method)</a>
@@ -3014,8 +3023,6 @@
 </li>
         <li><a href="CIME_api/CIME.case.html#module-CIME.case.check_input_data">CIME.case.check_input_data</a>
 </li>
-        <li><a href="CIME_api/CIME.case.html#module-CIME.case.check_lockedfiles">CIME.case.check_lockedfiles</a>
-</li>
         <li><a href="CIME_api/CIME.case.html#module-CIME.case.preview_namelists">CIME.case.preview_namelists</a>
 </li>
         <li><a href="CIME_api/CIME.html#module-CIME.code_checker">CIME.code_checker</a>
@@ -3043,6 +3050,8 @@
         <li><a href="CIME_api/CIME.html#module-CIME.get_tests">CIME.get_tests</a>
 </li>
         <li><a href="CIME_api/CIME.html#module-CIME.get_timing">CIME.get_timing</a>
+</li>
+        <li><a href="CIME_api/CIME.html#module-CIME.gitinterface">CIME.gitinterface</a>
 </li>
         <li><a href="CIME_api/CIME.html#module-CIME.hist_utils">CIME.hist_utils</a>
 </li>
@@ -3082,6 +3091,8 @@
 </li>
         <li><a href="CIME_api/CIME.html#module-CIME.simple_compare">CIME.simple_compare</a>
 </li>
+        <li><a href="CIME_api/CIME.html#module-CIME.status">CIME.status</a>
+</li>
         <li><a href="CIME_api/CIME.SystemTests.html#module-CIME.SystemTests">CIME.SystemTests</a>
 </li>
         <li><a href="CIME_api/CIME.SystemTests.html#module-CIME.SystemTests.dae">CIME.SystemTests.dae</a>
@@ -3118,8 +3129,6 @@
 </li>
         <li><a href="CIME_api/CIME.SystemTests.html#module-CIME.SystemTests.mcc">CIME.SystemTests.mcc</a>
 </li>
-        <li><a href="CIME_api/CIME.SystemTests.html#module-CIME.SystemTests.mvk">CIME.SystemTests.mvk</a>
-</li>
         <li><a href="CIME_api/CIME.SystemTests.html#module-CIME.SystemTests.nck">CIME.SystemTests.nck</a>
 </li>
         <li><a href="CIME_api/CIME.SystemTests.html#module-CIME.SystemTests.ncr">CIME.SystemTests.ncr</a>
@@ -3133,8 +3142,6 @@
         <li><a href="CIME_api/CIME.SystemTests.html#module-CIME.SystemTests.pet">CIME.SystemTests.pet</a>
 </li>
         <li><a href="CIME_api/CIME.SystemTests.html#module-CIME.SystemTests.pfs">CIME.SystemTests.pfs</a>
-</li>
-        <li><a href="CIME_api/CIME.SystemTests.html#module-CIME.SystemTests.pgn">CIME.SystemTests.pgn</a>
 </li>
         <li><a href="CIME_api/CIME.SystemTests.html#module-CIME.SystemTests.pre">CIME.SystemTests.pre</a>
 </li>
@@ -3220,6 +3227,8 @@
 </li>
         <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_case_fake">CIME.tests.test_unit_case_fake</a>
 </li>
+        <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_case_run">CIME.tests.test_unit_case_run</a>
+</li>
         <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_case_setup">CIME.tests.test_unit_case_setup</a>
 </li>
         <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_compare_test_results">CIME.tests.test_unit_compare_test_results</a>
@@ -3239,6 +3248,8 @@
         <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_grids">CIME.tests.test_unit_grids</a>
 </li>
         <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_hist_utils">CIME.tests.test_unit_hist_utils</a>
+</li>
+        <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_locked_files">CIME.tests.test_unit_locked_files</a>
 </li>
         <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_nmlgen">CIME.tests.test_unit_nmlgen</a>
 </li>
@@ -3261,6 +3272,8 @@
         <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_xml_env_batch">CIME.tests.test_unit_xml_env_batch</a>
 </li>
         <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_xml_env_mach_specific">CIME.tests.test_unit_xml_env_mach_specific</a>
+</li>
+        <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_xml_grids">CIME.tests.test_unit_xml_grids</a>
 </li>
         <li><a href="CIME_api/CIME.tests.html#module-CIME.tests.test_unit_xml_machines">CIME.tests.test_unit_xml_machines</a>
 </li>
@@ -3364,8 +3377,6 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="CIME_api/CIME.html#CIME.date.date.month">month() (CIME.date.date method)</a>
-</li>
-      <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.mvk.MVK">MVK (class in CIME.SystemTests.mvk)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -3475,10 +3486,10 @@
 </li>
       <li><a href="CIME_api/CIME.baselines.html#CIME.baselines.performance.perf_get_memory_list">perf_get_memory_list() (in module CIME.baselines.performance)</a>
 </li>
-      <li><a href="CIME_api/CIME.baselines.html#CIME.baselines.performance.perf_get_throughput">perf_get_throughput() (in module CIME.baselines.performance)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="CIME_api/CIME.baselines.html#CIME.baselines.performance.perf_get_throughput">perf_get_throughput() (in module CIME.baselines.performance)</a>
+</li>
       <li><a href="CIME_api/CIME.baselines.html#CIME.baselines.performance.perf_write_baseline">perf_write_baseline() (in module CIME.baselines.performance)</a>
 </li>
       <li><a href="CIME_api/CIME.XML.html#CIME.XML.pes.Pes">Pes (class in CIME.XML.pes)</a>
@@ -3486,8 +3497,6 @@
       <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.pet.PET">PET (class in CIME.SystemTests.pet)</a>
 </li>
       <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.pfs.PFS">PFS (class in CIME.SystemTests.pfs)</a>
-</li>
-      <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.pgn.PGN">PGN (class in CIME.SystemTests.pgn)</a>
 </li>
       <li><a href="CIME_api/CIME.html#CIME.test_status.TestStatus.phase_statuses_dump">phase_statuses_dump() (CIME.test_status.TestStatus method)</a>
 </li>
@@ -3505,15 +3514,15 @@
 </li>
       <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.print_compset">print_compset() (in module CIME.scripts.query_config)</a>
 </li>
+      <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.print_machine_values">print_machine_values() (in module CIME.scripts.query_config)</a>
+</li>
       <li><a href="CIME_api/CIME.html#CIME.config.ConfigBase.print_rst_table">print_rst_table() (CIME.config.ConfigBase method)</a>
 </li>
       <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_testlists.print_test_data">print_test_data() (in module CIME.scripts.query_testlists)</a>
 </li>
-      <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.Machines.print_values">print_values() (CIME.scripts.query_config.Machines method)</a>
+      <li><a href="CIME_api/CIME.XML.html#CIME.XML.component.Component.print_values">print_values() (CIME.XML.component.Component method)</a>
 
       <ul>
-        <li><a href="CIME_api/CIME.XML.html#CIME.XML.component.Component.print_values">(CIME.XML.component.Component method)</a>
-</li>
         <li><a href="CIME_api/CIME.XML.html#CIME.XML.compsets.Compsets.print_values">(CIME.XML.compsets.Compsets method)</a>
 </li>
         <li><a href="CIME_api/CIME.XML.html#CIME.XML.grids.Grids.print_values">(CIME.XML.grids.Grids method)</a>
@@ -3535,18 +3544,16 @@
 <h2 id="Q">Q</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.query_all_components">query_all_components() (in module CIME.scripts.query_config)</a>
-</li>
-      <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.query_component">query_component() (in module CIME.scripts.query_config)</a>
+      <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.query_component_settings">query_component_settings() (in module CIME.scripts.query_config)</a>
 </li>
       <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.query_compsets">query_compsets() (in module CIME.scripts.query_config)</a>
 </li>
       <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.query_grids">query_grids() (in module CIME.scripts.query_config)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="CIME_api/CIME.scripts.html#CIME.scripts.query_config.query_machines">query_machines() (in module CIME.scripts.query_config)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.utils.CMakeTester.query_var">query_var() (CIME.tests.utils.CMakeTester method)</a>
 
       <ul>
@@ -3633,10 +3640,10 @@
 </li>
       <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.system_tests_common.SystemTestsCommon.run">run() (CIME.SystemTests.system_tests_common.SystemTestsCommon method)</a>
 </li>
-      <li><a href="CIME_api/CIME.html#CIME.utils.run_and_log_case_status">run_and_log_case_status() (in module CIME.utils)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="CIME_api/CIME.html#CIME.status.run_and_log_case_status">run_and_log_case_status() (in module CIME.status)</a>
+</li>
       <li><a href="CIME_api/CIME.html#CIME.utils.run_bld_cmd_ensure_logging">run_bld_cmd_ensure_logging() (in module CIME.utils)</a>
 </li>
       <li><a href="CIME_api/CIME.html#CIME.utils.run_cmd">run_cmd() (in module CIME.utils)</a>
@@ -3681,8 +3688,6 @@
         <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.nodefail.NODEFAIL.run_phase">(CIME.SystemTests.nodefail.NODEFAIL method)</a>
 </li>
         <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.pfs.PFS.run_phase">(CIME.SystemTests.pfs.PFS method)</a>
-</li>
-        <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.pgn.PGN.run_phase">(CIME.SystemTests.pgn.PGN method)</a>
 </li>
         <li><a href="CIME_api/CIME.SystemTests.html#CIME.SystemTests.pre.PRE.run_phase">(CIME.SystemTests.pre.PRE method)</a>
 </li>
@@ -3870,6 +3875,8 @@
 </li>
         <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_sys_query_config.TestQueryConfig.setUp">(CIME.tests.test_sys_query_config.TestQueryConfig method)</a>
 </li>
+        <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_sys_unittest.TestUnitTest.setUp">(CIME.tests.test_sys_unittest.TestUnitTest method)</a>
+</li>
         <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_sys_wait_for_tests.TestWaitForTests.setUp">(CIME.tests.test_sys_wait_for_tests.TestWaitForTests method)</a>
 </li>
         <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_case.TestCase.setUp">(CIME.tests.test_unit_case.TestCase method)</a>
@@ -3946,6 +3953,8 @@
       <li><a href="glossary/index.html#term-source-modifications-CASEROOT-SourceMods"><strong>source modifications (CASEROOT/SourceMods)</strong></a>
 </li>
       <li><a href="CIME_api/CIME.XML.html#CIME.XML.namelist_definition.NamelistDefinition.split_type_string">split_type_string() (CIME.XML.namelist_definition.NamelistDefinition method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_config.spy">spy() (in module CIME.tests.test_unit_config)</a>
 </li>
       <li><a href="CIME_api/CIME.case.html#CIME.case.case.Case.stage_refcase">stage_refcase() (CIME.case.case.Case method)</a>
 
@@ -4203,7 +4212,21 @@
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_case.TestCaseSubmit.test_check_case">test_check_case() (CIME.tests.test_unit_case.TestCaseSubmit method)</a>
 </li>
-      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_case.TestCaseSubmit.test_check_case_test">test_check_case_test() (CIME.tests.test_unit_case.TestCaseSubmit method)</a>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_batch">test_check_diff_env_batch() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_build">test_check_diff_env_build() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_build_no_diff">test_check_diff_env_build_no_diff() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_build_pio_version">test_check_diff_env_build_pio_version() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_case">test_check_diff_env_case() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_env_mach_pes">test_check_diff_env_mach_pes() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_reset_and_rebuild">test_check_diff_reset_and_rebuild() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_diff_reset_and_rebuild_single">test_check_diff_reset_and_rebuild_single() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_system_tests.TestUnitSystemTests.test_check_for_memleak">test_check_for_memleak() (CIME.tests.test_unit_system_tests.TestUnitSystemTests method)</a>
 </li>
@@ -4212,6 +4235,14 @@
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_system_tests.TestUnitSystemTests.test_check_for_memleak_not_enough_samples">test_check_for_memleak_not_enough_samples() (CIME.tests.test_unit_system_tests.TestUnitSystemTests method)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_system_tests.TestUnitSystemTests.test_check_for_memleak_runtime_error">test_check_for_memleak_runtime_error() (CIME.tests.test_unit_system_tests.TestUnitSystemTests method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_lockedfile">test_check_lockedfile() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_lockedfiles">test_check_lockedfiles() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_lockedfiles_quiet">test_check_lockedfiles_quiet() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_check_lockedfiles_skip">test_check_lockedfiles_skip() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_grids.TestComponentGrids.test_check_num_elements_right_ndomains">test_check_num_elements_right_ndomains() (CIME.tests.test_unit_grids.TestComponentGrids method)</a>
 </li>
@@ -4341,6 +4372,14 @@
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_paramgen.TestParamGenXmlConstructor.test_default_var">test_default_var() (CIME.tests.test_unit_paramgen.TestParamGenXmlConstructor method)</a>
 </li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_diff_lockedfile">test_diff_lockedfile() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_diff_lockedfile_detect_difference">test_diff_lockedfile_detect_difference() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_diff_lockedfile_does_not_exist">test_diff_lockedfile_does_not_exist() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_diff_lockedfile_not_supported">test_diff_lockedfile_not_supported() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_utils.TestFileContainsPythonFunction.test_does_not_contain_correct_def">test_does_not_contain_correct_def() (CIME.tests.test_unit_utils.TestFileContainsPythonFunction method)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_system_tests.TestUnitSystemTests.test_dry_run">test_dry_run() (CIME.tests.test_unit_system_tests.TestUnitSystemTests method)</a>
@@ -4455,6 +4494,8 @@
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_compare_test_results.TestCaseFake.test_hist_only">test_hist_only() (CIME.tests.test_unit_compare_test_results.TestCaseFake method)</a>
 </li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_config.TestConfig.test_ignore">test_ignore() (CIME.tests.test_unit_config.TestConfig method)</a>
+</li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_utils.TestUtils.test_import_and_run_sub_or_cmd">test_import_and_run_sub_or_cmd() (CIME.tests.test_unit_utils.TestUtils method)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_utils.TestUtils.test_import_and_run_sub_or_cmd_cime_py">test_import_and_run_sub_or_cmd_cime_py() (CIME.tests.test_unit_utils.TestUtils method)</a>
@@ -4487,12 +4528,12 @@
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_case.TestCase_RecordCmd.test_init">test_init() (CIME.tests.test_unit_case.TestCase_RecordCmd method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_paramgen.TestParamGen.test_init_data">test_init_data() (CIME.tests.test_unit_paramgen.TestParamGen method)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_nmlgen.TestNamelistGenerator.test_init_defaults">test_init_defaults() (CIME.tests.test_unit_nmlgen.TestNamelistGenerator method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_xml_env_mach_specific.TestXMLEnvMachSpecific.test_init_path">test_init_path() (CIME.tests.test_unit_xml_env_mach_specific.TestXMLEnvMachSpecific method)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_paramgen.TestParamGenYamlConstructor.test_input_data_list">test_input_data_list() (CIME.tests.test_unit_paramgen.TestParamGenYamlConstructor method)</a>
@@ -4512,6 +4553,8 @@
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_bless_test_results.TestUnitBlessTestResults.test_is_bless_needed_overall_fail">test_is_bless_needed_overall_fail() (CIME.tests.test_unit_bless_test_results.TestUnitBlessTestResults method)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_bless_test_results.TestUnitBlessTestResults.test_is_bless_needed_run_phase_fail">test_is_bless_needed_run_phase_fail() (CIME.tests.test_unit_bless_test_results.TestUnitBlessTestResults method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_is_locked">test_is_locked() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_xml_machines.TestUnitXMLMachines.test_is_valid_compiler">test_is_valid_compiler() (CIME.tests.test_unit_xml_machines.TestUnitXMLMachines method)</a>
 </li>
@@ -4538,6 +4581,12 @@
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_doctest.TestDocs.test_lib_docs">test_lib_docs() (CIME.tests.test_unit_doctest.TestDocs method)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_config.TestConfig.test_load">test_load() (CIME.tests.test_unit_config.TestConfig method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_lock_file">test_lock_file() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_lock_file_error_path">test_lock_file_error_path() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_lock_file_newname">test_lock_file_newname() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_sys_create_newcase.TestCreateNewcase.test_m_createnewcase_alternate_drivers">test_m_createnewcase_alternate_drivers() (CIME.tests.test_sys_create_newcase.TestCreateNewcase method)</a>
 </li>
@@ -4603,6 +4652,10 @@
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_baselines_performance.TestUnitBaselinesPerformance.test_perf_write_baseline">test_perf_write_baseline() (CIME.tests.test_unit_baselines_performance.TestUnitBaselinesPerformance method)</a>
 </li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_case_run.TestCaseSubmit.test_post_run_check">test_post_run_check() (CIME.tests.test_unit_case_run.TestCaseSubmit method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_case_run.TestCaseSubmit.test_post_run_check_no_termination">test_post_run_check_no_termination() (CIME.tests.test_unit_case_run.TestCaseSubmit method)</a>
+</li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_test_status.TestTestStatus.test_psdump_corePhasesPass">test_psdump_corePhasesPass() (CIME.tests.test_unit_test_status.TestTestStatus method)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_test_status.TestTestStatus.test_psdump_oneCorePhaseFails">test_psdump_oneCorePhaseFails() (CIME.tests.test_unit_test_status.TestTestStatus method)</a>
@@ -4636,6 +4689,8 @@
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_baselines_performance.TestUnitBaselinesPerformance.test_read_baseline_file_content">test_read_baseline_file_content() (CIME.tests.test_unit_baselines_performance.TestUnitBaselinesPerformance method)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_baselines_performance.TestUnitBaselinesPerformance.test_read_baseline_file_multi_line">test_read_baseline_file_multi_line() (CIME.tests.test_unit_baselines_performance.TestUnitBaselinesPerformance method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_xml_grids.TestXMLGrids.test_read_config_grids">test_read_config_grids() (CIME.tests.test_unit_xml_grids.TestXMLGrids method)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_sys_bless_tests_results.TestBlessTestResults.test_rebless_namelist">test_rebless_namelist() (CIME.tests.test_sys_bless_tests_results.TestBlessTestResults method)</a>
 </li>
@@ -4751,6 +4806,10 @@
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_paramgen.TestParamGen.test_undefined_var">test_undefined_var() (CIME.tests.test_unit_paramgen.TestParamGen method)</a>
 </li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_unlock_file">test_unlock_file() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles.test_unlock_file_error_path">test_unlock_file_error_path() (CIME.tests.test_unit_locked_files.TestLockedFiles method)</a>
+</li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_sys_user_concurrent_mods.TestUserConcurrentMods.test_user_concurrent_mods">test_user_concurrent_mods() (CIME.tests.test_sys_user_concurrent_mods.TestUserConcurrentMods method)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_sys_wait_for_tests.TestWaitForTests.test_wait_for_test_all_pass">test_wait_for_test_all_pass() (CIME.tests.test_sys_wait_for_tests.TestWaitForTests method)</a>
@@ -4804,7 +4863,11 @@
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_case_setup.TestCaseSetup">TestCaseSetup (class in CIME.tests.test_unit_case_setup)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_case.TestCaseSubmit">TestCaseSubmit (class in CIME.tests.test_unit_case)</a>
+
+      <ul>
+        <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_case_run.TestCaseSubmit">(class in CIME.tests.test_unit_case_run)</a>
 </li>
+      </ul></li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_sys_cime_case.TestCimeCase">TestCimeCase (class in CIME.tests.test_sys_cime_case)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_sys_cime_performance.TestCimePerformance">TestCimePerformance (class in CIME.tests.test_sys_cime_performance)</a>
@@ -4844,6 +4907,8 @@
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_two_link_to_case2_output.TestLinkToCase2Output">TestLinkToCase2Output (class in CIME.tests.test_unit_two_link_to_case2_output)</a>
 </li>
       <li><a href="CIME_api/CIME.XML.html#CIME.XML.testlist.Testlist">Testlist (class in CIME.XML.testlist)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_locked_files.TestLockedFiles">TestLockedFiles (class in CIME.tests.test_unit_locked_files)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_sys_manage_and_query.TestManageAndQuery">TestManageAndQuery (class in CIME.tests.test_sys_manage_and_query)</a>
 </li>
@@ -4930,6 +4995,8 @@
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_xml_env_batch.TestXMLEnvBatch">TestXMLEnvBatch (class in CIME.tests.test_unit_xml_env_batch)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_xml_env_mach_specific.TestXMLEnvMachSpecific">TestXMLEnvMachSpecific (class in CIME.tests.test_unit_xml_env_mach_specific)</a>
+</li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_xml_grids.TestXMLGrids">TestXMLGrids (class in CIME.tests.test_unit_xml_grids)</a>
 </li>
       <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_xml_namelist_definition.TestXMLNamelistDefinition">TestXMLNamelistDefinition (class in CIME.tests.test_unit_xml_namelist_definition)</a>
 </li>
@@ -5063,6 +5130,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="CIME_api/CIME.baselines.html#CIME.baselines.performance.write_baseline_file">write_baseline_file() (in module CIME.baselines.performance)</a>
 </li>
+      <li><a href="CIME_api/CIME.tests.html#CIME.tests.test_unit_xml_grids.write_config_grids">write_config_grids() (in module CIME.tests.test_unit_xml_grids)</a>
+</li>
       <li><a href="CIME_api/CIME.html#CIME.nmlgen.NamelistGenerator.write_modelio_file">write_modelio_file() (CIME.nmlgen.NamelistGenerator method)</a>
 </li>
       <li><a href="CIME_api/CIME.html#CIME.namelist.Namelist.write_nuopc">write_nuopc() (CIME.namelist.Namelist method)</a>
@@ -5127,7 +5196,44 @@
       </div>
     </section>
   </div>
-  <script>
+  
+
+  <script type="text/javascript">
+    let baseUriRegex = /(.*\/cime)\/.*/g;
+    let parsedUri = baseUriRegex.exec(document.baseURI);
+
+    if (parsedUri != null && parsedUri.length == 2) {
+      let baseUri = parsedUri[1];
+
+      $.get(`${baseUri}/versions/versions.json`, function(data) {
+        let versionElement = $("#versions");
+
+        Object.keys(data).forEach(function(key) {
+          let value = data[key];
+
+          let item = `<dd><a href="${baseUri}/versions/${key}/html/">${value}</a></dd>`
+
+          versionElement.append(item);
+        });
+      });
+    }
+  </script>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Read the Docs</span>
+      v: master
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      
+      <dl id="versions">
+        <dt>Versions</dt>
+      </dl>
+      
+      
+    </div>
+  </div>
+<script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
