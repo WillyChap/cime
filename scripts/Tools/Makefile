@@ -534,6 +534,10 @@ endif
 ifdef LAPACK_LIBDIR
    SLIBS += -L$(LAPACK_LIBDIR) -llapack -lblas
 endif
+#SPHEREPACK for stoch
+ifdef SPHEREPACK_LIBDIR
+  SLIBS += -L$(SPHEREPACK_LIBDIR) -lspherepack
+endif
 ifdef LIB_MPI
    ifndef MPI_LIB_NAME
       SLIBS += -L$(LIB_MPI) -lmpi
