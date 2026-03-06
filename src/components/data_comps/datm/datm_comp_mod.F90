@@ -24,6 +24,7 @@ module datm_comp_mod
 
   use datm_shr_mod   , only: datm_shr_getNextRadCDay, datm_shr_esat, datm_shr_CORE2getFactors
   use datm_shr_mod   , only: datamode       ! namelist input
+  use datm_datamode_camulator_mod, only: datm_datamode_camulator_run
   use datm_shr_mod   , only: decomp         ! namelist input
   use datm_shr_mod   , only: wiso_datm      ! namelist input
   use datm_shr_mod   , only: rest_file      ! namelist input
@@ -1019,6 +1020,27 @@ CONTAINS
           a2x%rAttr(krl,n) = max(0.0_R8, a2x%rAttr(krl,n)*(         frac) )
 
        enddo
+
+    case('CAMULATOR')
+       !-------------------------------------------------------------------
+       ! CAMulator AI-atmosphere coupling (Chapman et al. 2025).
+       ! File-based protocol: writes camulator_sst_in.nc + go.flag, polls
+       ! done.flag, reads camulator_cam_out.nc, fills a2x.
+       ! The Python server (camulator_server.py) must be running.
+       !-------------------------------------------------------------------
+       call datm_datamode_camulator_run( &
+            x2a        = x2a,          &
+            a2x        = a2x,          &
+            ggrid      = ggrid,        &
+            gsmap      = gsmap,        &
+            mpicom     = mpicom,       &
+            my_task    = my_task,      &
+            master_task= master_task,  &
+            logunit    = logunit,      &
+            currentYMD = currentYMD,   &
+            currentTOD = currentTOD,   &
+            nxg        = SDATM%nxg,    &
+            nyg        = SDATM%nyg)
 
     end select
 

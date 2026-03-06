@@ -163,7 +163,8 @@ CONTAINS
          trim(datamode) == 'CORE_IAF_JRA' .or. &
          trim(datamode) == 'CORE_RYF_JRA' .or. &
          trim(datamode) == 'CLMNCEP'   .or. &
-         trim(datamode) == 'COPYALL'   ) then
+         trim(datamode) == 'COPYALL'   .or. &
+         trim(datamode) == 'CAMULATOR' ) then
        if (my_task == master_task) then
           write(logunit,F00) ' datm datamode = ',trim(datamode)
           call shr_sys_flush(logunit)
