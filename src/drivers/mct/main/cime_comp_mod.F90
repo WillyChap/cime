@@ -3391,7 +3391,11 @@ contains
           !| atm prep-merge
           !----------------------------------------------------------
 
-          if (iamin_CPLID .and. atm_prognostic) then
+          if (iamin_CPLID .and. (atm_prognostic .or. atm_present)) then
+             ! NOTE: atm_present (not just atm_prognostic) so that DATA atmosphere
+             ! components (e.g. DATM CAMULATOR mode) also receive a populated x2c_cx
+             ! containing ocean SST (So_t) and other surface state on each coupling step.
+             ! Standard DATA modes (IAF, CORE2) ignore x2a fields, so this is harmless.
              call cime_comp_barriers(mpicom=mpicom_CPLID, timer='CPL:ATMPREP_BARRIER')
              call t_drvstartf ('CPL:ATMPREP',cplrun=.true.,barrier=mpicom_CPLID)
              if (drv_threading) call seq_comm_setnthreads(nthreads_CPLID)
@@ -3418,6 +3422,12 @@ contains
                 call prep_atm_calc_l2x_ax(fractions_lx, timer='CPL:atmprep_lnd2atm')
              endif
 
+             ! NOTE: For DATA ATM (atm_present but not atm_prognostic), xao_ax is null
+             ! because the INIT phase assignment (line ~1974) is guarded by atm_prognostic.
+             ! prep_aoflux_init always allocates xao_ax unconditionally, so we can always
+             ! retrieve the pointer here before the associated() check.
+             xao_ax => prep_aoflux_get_xao_ax()
+
              if (associated(xao_ax)) then
                 call prep_atm_mrg(infodata, fractions_ax, xao_ax=xao_ax, timer_mrg='CPL:atmprep_mrgx2a')
              endif
@@ -3433,7 +3443,11 @@ contains
           !| cpl -> atm
           !----------------------------------------------------------
 
-          if (iamin_CPLALLATMID .and. atm_prognostic) then
+          if (iamin_CPLALLATMID .and. (atm_prognostic .or. atm_present)) then
+             ! NOTE: atm_present (not just atm_prognostic) so that DATA atmosphere
+             ! components (e.g. DATM CAMULATOR mode) also receive ocean state (So_t, etc.)
+             ! via x2a on each coupling step.  Standard DATA modes (IAF, CORE2) ignore x2a,
+             ! so this exchange is harmless for them.
              call component_exch(atm, flow='x2c', infodata=infodata, infodata_string='cpl2atm_run', &
                   mpicom_barrier=mpicom_CPLALLATMID, run_barriers=run_barriers, &
                   timer_barrier='CPL:C2A_BARRIER', timer_comp_exch='CPL:C2A', &
