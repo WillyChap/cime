@@ -24,14 +24,11 @@ module datm_datamode_camulator_mod
   !   - CAMulator TAUX/TAUY are provided as 10m winds (Sa_u, Sa_v).
   !     The CPL7 bulk formula computes wind stress from these.
   !     (Phase 2: bypass bulk formula by directly setting Faxx_taux/tauy)
-  !   - CAMulator LW output is net LW at surface (FLNS, positive upward).
-  !     We split into downward LW:  Faxa_lwdn = FLNSD (downward component).
-  !     If Python provides only net LW, estimate FLNSD = FLNS_net + sigma*Ts^4.
-  !   - SW: Python server reconstructs FSDS (downwelling SW) from FSNS via
-  !     FSDS = FSNS / (1-alpha_sfc), where alpha_sfc uses CICE ice fraction.
-  !     We split FSDS into direct/diffuse components using fixed fractions.
-  !     The coupler (seq_flux_mct.F90) then applies ocean/ice albedo to get
-  !     absorbed SW — this is the correct sign/magnitude convention.
+  !   - CAMulator radiation: Now provided as separate upwelling/downwelling
+  !     components (FSDS, FSUS, FLDS, FLUS) rather than net values.
+  !     FSDS is split into direct/diffuse bands; FSUS is subtracted from
+  !     FSDS to provide Swnet. FLDS is used directly as downward LW.
+
   !   - Precip: PRECT in m/s liquid-water equivalent. Split rain/snow by
   !     temperature and convert to kg m-2 s-1 (multiply by rho_w=1000).
   !
@@ -50,8 +47,10 @@ module datm_datamode_camulator_mod
   !   tbot  (ngrid)  : near-surface temperature [K]-> Sa_tbot, Sa_ptem
   !   qbot  (ngrid)  : specific humidity [kg/kg]   -> Sa_shum
   !   pbot  (ngrid)  : near-surface pressure [Pa]  -> Sa_pbot, Sa_pslv
-  !   fsds  (ngrid)  : downwelling SW [W m-2]        -> Faxa_sw* (split; coupler applies albedo)
-  !   flnsd (ngrid)  : downward LW at surface [W m-2]-> Faxa_lwdn
+  !   fsds  (ngrid)  : downwelling SW [W m-2]        -> Faxa_sw* (split)
+  !   fsus  (ngrid)  : upwelling SW [W m-2]          -> used for Faxa_swnet
+  !   flds  (ngrid)  : downwelling LW [W m-2]        -> Faxa_lwdn
+  !   flus  (ngrid)  : upwelling LW [W m-2]          -> (diagnostic)
   !   prect (ngrid)  : total precip [m s-1 liq eq] -> Faxa_rainl / Faxa_snowl
   !
   ! Author: Claude Code  (generated 2026-02-22)
@@ -124,8 +123,10 @@ module datm_datamode_camulator_mod
   real(R8), allocatable, save :: g_zbot(:)    ! height of bottom model level midpoint [m]
   real(R8), allocatable, save :: g_qbot(:)    ! specific humidity at bottom model level [kg/kg]
   real(R8), allocatable, save :: g_pbot(:)    ! surface pressure [Pa]
-  real(R8), allocatable, save :: g_fsds(:)    ! downwelling SW [W m-2] (reconstructed from FSNS in Python)
-  real(R8), allocatable, save :: g_flnsd(:)   ! downward LW [W m-2]
+  real(R8), allocatable, save :: g_fsds(:)    ! downwelling SW [W m-2]
+  real(R8), allocatable, save :: g_fsus(:)    ! upwelling SW [W m-2]
+  real(R8), allocatable, save :: g_flds(:)    ! downwelling LW [W m-2]
+  real(R8), allocatable, save :: g_flus(:)    ! upwelling LW [W m-2]
   real(R8), allocatable, save :: g_prect(:)   ! total precip [m s-1]
 
   !--- per-rank gather/scatter work arrays (allocated on firstcall) ---
@@ -166,7 +167,7 @@ CONTAINS
     real(R8), allocatable :: local_sst(:), local_ifrac(:)
     real(R8), allocatable :: local_u10(:), local_v10(:), local_tbot(:), local_zbot(:)
     real(R8), allocatable :: local_qbot(:), local_pbot(:)
-    real(R8), allocatable :: local_fsds(:), local_flnsd(:), local_prect(:)
+    real(R8), allocatable :: local_fsds(:), local_fsus(:), local_flds(:), local_flus(:), local_prect(:)
     real(R8)  :: rain_kg, snow_kg, swdn, dens
     logical   :: flag_exists
     integer(IN) :: poll_iter
@@ -230,7 +231,9 @@ CONTAINS
        allocate(g_qbot (lsize_global)); g_qbot   = 1.0e-3_R8
        allocate(g_pbot (lsize_global)); g_pbot   = 1.01325e5_R8
        allocate(g_fsds (lsize_global)); g_fsds   = 0.0_R8
-       allocate(g_flnsd(lsize_global)); g_flnsd  = 300.0_R8
+       allocate(g_fsus (lsize_global)); g_fsus   = 0.0_R8
+       allocate(g_flds (lsize_global)); g_flds   = 300.0_R8
+       allocate(g_flus (lsize_global)); g_flus   = 350.0_R8
        allocate(g_prect(lsize_global)); g_prect  = 0.0_R8
 
        cam_initialized = .true.
@@ -330,14 +333,16 @@ CONTAINS
 
        !--- read camulator_cam_out.nc ---
        call read_cam_nc(g_u10, g_v10, g_tbot, g_zbot, g_qbot, g_pbot, &
-                        g_fsds, g_flnsd, g_prect, lsize_global, logunit)
+                        g_fsds, g_fsus, g_flds, g_flus, g_prect, lsize_global, logunit)
 
        !--- apply safety clamps ---
        where (abs(g_u10)  > WIND_MAX ) g_u10  = sign(WIND_MAX,  g_u10)
        where (abs(g_v10)  > WIND_MAX ) g_v10  = sign(WIND_MAX,  g_v10)
        where (g_qbot < QBOT_MIN      ) g_qbot  = QBOT_MIN
-       where (g_flnsd < 0.0_R8       ) g_flnsd = 0.0_R8
+       where (g_flds  < 0.0_R8       ) g_flds  = 0.0_R8
+       where (g_flus  < 0.0_R8       ) g_flus  = 0.0_R8
        where (g_fsds  < 0.0_R8       ) g_fsds  = 0.0_R8
+       where (g_fsus  < 0.0_R8       ) g_fsus  = 0.0_R8
        where (g_prect < 0.0_R8       ) g_prect = 0.0_R8
 
        !--- log global diagnostics ---
@@ -346,7 +351,9 @@ CONTAINS
             sum(sqrt(g_u10**2+g_v10**2))/lsize_global
        write(logunit,F02) 'CAMULATOR: global mean zbot [m]  = ', sum(g_zbot)/lsize_global
        write(logunit,F02) 'CAMULATOR: global mean FSDS W/m2 = ', sum(g_fsds)/lsize_global
-       write(logunit,F02) 'CAMULATOR: global mean FLNSD W/m2= ', sum(g_flnsd)/lsize_global
+       write(logunit,F02) 'CAMULATOR: global mean FSUS W/m2 = ', sum(g_fsus)/lsize_global
+       write(logunit,F02) 'CAMULATOR: global mean FLDS W/m2 = ', sum(g_flds)/lsize_global
+       write(logunit,F02) 'CAMULATOR: global mean FLUS W/m2 = ', sum(g_flus)/lsize_global
        call shr_sys_flush(logunit)
 
        !--- remove done.flag ---
@@ -365,7 +372,9 @@ CONTAINS
     call shr_mpi_bcast(g_qbot,  mpicom, 'g_qbot' )
     call shr_mpi_bcast(g_pbot,  mpicom, 'g_pbot' )
     call shr_mpi_bcast(g_fsds,  mpicom, 'g_fsds' )
-    call shr_mpi_bcast(g_flnsd, mpicom, 'g_flnsd')
+    call shr_mpi_bcast(g_fsus,  mpicom, 'g_fsus' )
+    call shr_mpi_bcast(g_flds,  mpicom, 'g_flds' )
+    call shr_mpi_bcast(g_flus,  mpicom, 'g_flus' )
     call shr_mpi_bcast(g_prect, mpicom, 'g_prect')
 
     !===========================================================================
@@ -379,7 +388,9 @@ CONTAINS
     allocate(local_qbot (lsize_local))
     allocate(local_pbot (lsize_local))
     allocate(local_fsds (lsize_local))
-    allocate(local_flnsd(lsize_local))
+    allocate(local_fsus (lsize_local))
+    allocate(local_flds (lsize_local))
+    allocate(local_flus (lsize_local))
     allocate(local_prect(lsize_local))
 
     call MPI_Scatterv(g_u10,  recvcounts, displs, MPI_DOUBLE_PRECISION, &
@@ -403,8 +414,14 @@ CONTAINS
     call MPI_Scatterv(g_fsds, recvcounts, displs, MPI_DOUBLE_PRECISION, &
                       local_fsds,  lsize_local,   MPI_DOUBLE_PRECISION, &
                       master_task, mpicom, ierr)
-    call MPI_Scatterv(g_flnsd,recvcounts, displs, MPI_DOUBLE_PRECISION, &
-                      local_flnsd, lsize_local,   MPI_DOUBLE_PRECISION, &
+    call MPI_Scatterv(g_fsus, recvcounts, displs, MPI_DOUBLE_PRECISION, &
+                      local_fsus,  lsize_local,   MPI_DOUBLE_PRECISION, &
+                      master_task, mpicom, ierr)
+    call MPI_Scatterv(g_flds, recvcounts, displs, MPI_DOUBLE_PRECISION, &
+                      local_flds,  lsize_local,   MPI_DOUBLE_PRECISION, &
+                      master_task, mpicom, ierr)
+    call MPI_Scatterv(g_flus, recvcounts, displs, MPI_DOUBLE_PRECISION, &
+                      local_flus,  lsize_local,   MPI_DOUBLE_PRECISION, &
                       master_task, mpicom, ierr)
     call MPI_Scatterv(g_prect,recvcounts, displs, MPI_DOUBLE_PRECISION, &
                       local_prect, lsize_local,   MPI_DOUBLE_PRECISION, &
@@ -447,18 +464,18 @@ CONTAINS
        a2x%rAttr(kdens, n) = dens
 
        !--- downward longwave [W m-2] ---
-       a2x%rAttr(klwdn, n) = local_flnsd(n)
+       a2x%rAttr(klwdn, n) = local_flds(n)
 
        !--- shortwave: split downwelling SW (FSDS) into four bands ---
-       !    FSDS is downwelling before surface reflection (reconstructed in Python).
-       !    CPL7 seq_flux_mct.F90 applies ocean/ice albedo to these fields
-       !    to compute reflected SW, so we MUST pass downwelling (not net) here.
+       !    FSDS is downwelling before surface reflection.
+       !    The coupler (seq_flux_mct.F90) applies albedo to these to get reflected.
+       !    We also provide kswnet as (FSDS - FSUS) for consistency checks.
        swdn = local_fsds(n)
        a2x%rAttr(kswvdr, n) = swdn * sw_frac_swvdr
        a2x%rAttr(kswndr, n) = swdn * sw_frac_swndr
        a2x%rAttr(kswvdf, n) = swdn * sw_frac_swvdf
        a2x%rAttr(kswndf, n) = swdn * sw_frac_swndf
-       a2x%rAttr(kswnet, n) = swdn
+       a2x%rAttr(kswnet, n) = local_fsds(n) - local_fsus(n)
 
        !--- precipitation [kg m-2 s-1] from PRECT [m s-1] * rho_w
        !    rain if tbot > freezing, snow otherwise
@@ -476,7 +493,7 @@ CONTAINS
     end do  ! lsize
 
     deallocate(local_u10, local_v10, local_tbot, local_zbot, local_qbot, local_pbot)
-    deallocate(local_fsds, local_flnsd, local_prect)
+    deallocate(local_fsds, local_fsus, local_flds, local_flus, local_prect)
 
   end subroutine datm_datamode_camulator_run
 
@@ -526,12 +543,12 @@ CONTAINS
   ! Private helper: read camulator_cam_out.nc
   !============================================================================
 
-  subroutine read_cam_nc(u10, v10, tbot, zbot, qbot, pbot, fsds, flnsd, prect, &
+  subroutine read_cam_nc(u10, v10, tbot, zbot, qbot, pbot, fsds, fsus, flds, flus, prect, &
                           ngrid, logunit)
 
     real(R8),    intent(out) :: u10(ngrid), v10(ngrid), tbot(ngrid), zbot(ngrid)
     real(R8),    intent(out) :: qbot(ngrid), pbot(ngrid)
-    real(R8),    intent(out) :: fsds(ngrid), flnsd(ngrid), prect(ngrid)
+    real(R8),    intent(out) :: fsds(ngrid), fsus(ngrid), flds(ngrid), flus(ngrid), prect(ngrid)
     integer(IN), intent(in)  :: ngrid, logunit
 
     integer(IN) :: ncid, varid, ierr
@@ -548,7 +565,9 @@ CONTAINS
     call nc_get(ncid, 'qbot',  qbot,  ngrid)
     call nc_get(ncid, 'pbot',  pbot,  ngrid)
     call nc_get(ncid, 'fsds',  fsds,  ngrid)
-    call nc_get(ncid, 'flnsd', flnsd, ngrid)
+    call nc_get(ncid, 'fsus',  fsus,  ngrid)
+    call nc_get(ncid, 'flds',  flds,  ngrid)
+    call nc_get(ncid, 'flus',  flus,  ngrid)
     call nc_get(ncid, 'prect', prect, ngrid)
 
     ierr = nf90_close(ncid)
